@@ -5,6 +5,7 @@ const morgan = require("morgan");
 
 const db = require("./models");
 const cardRouter = require("./routers/card");
+const { errorHandler } = require("./utils/error-handling");
 
 const PORT = process.env.PORT || 5000;
 
@@ -21,6 +22,8 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 app.use("/api/card", cardRouter);
+
+app.use(errorHandler);
 
 db.sequelize.sync().then(() => {
   console.log("DB synced");
