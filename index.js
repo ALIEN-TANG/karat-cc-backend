@@ -2,7 +2,11 @@ require("dotenv").config();
 const cors = require("cors");
 const { json, urlencoded } = require("body-parser");
 const morgan = require("morgan");
+
 const db = require("./models");
+const cardRouter = require("./routers/card");
+const { errorHandler } = require("./utils/error-handling");
+
 const PORT = process.env.PORT || 5000;
 
 const express = require("express");
@@ -17,6 +21,9 @@ app.use(morgan("dev"));
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+app.use("/api/card", cardRouter);
+
+app.use(errorHandler);
 
 db.sequelize.sync().then(() => {
   console.log("DB synced");
