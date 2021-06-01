@@ -35,8 +35,23 @@ async function getMetrics(req, res) {
     return res.status(500).json({ error: { message: "Server error." } });
   }
 }
+async function getActivity(req, res) {
+  const { cardId } = req.params;
+  try {
+    const card = await Card.findByPk(cardId);
+    const transactions = await card.getTransactions();
+    if (transactions && transactions.length) {
+      return res.status(200).json({ data: transactions });
+    } else {
+      return res.status(404).json({ error: "No transactions found." });
+    }
+  } catch (e) {
+    return res.status(500).json({ error: { message: "Server error." } });
+  }
+}
 
 module.exports = {
   findOne,
   getMetrics,
+  getActivity,
 };
