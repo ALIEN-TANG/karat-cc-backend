@@ -40,6 +40,7 @@ Once you have PosgreSQL set up, migrate the models and seed the database with th
 
 ```
 $ npm run migrate
+$ npm run dev // run once to sync database
 $ npm run seed
 ```
 
