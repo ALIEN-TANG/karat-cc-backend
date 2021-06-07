@@ -39,7 +39,6 @@ This application uses a PostgreSQL database with [Sequelize (v6)](https://sequel
 Once you have PosgreSQL set up, migrate the models and seed the database with the following commands:
 
 ```
-$ npm run migrate
 $ npm run dev // run once to sync database
 $ npm run seed
 ```
